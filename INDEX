@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOADING - Localisation de Téléphone</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><i class="fas fa-map-marker-alt"></i> LOADING</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" onclick="showSection('home')">Accueil</a></li>
+                <li><a href="#services" onclick="showSection('services')">Services</a></li>
+                <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
+                <li><a href="#login" onclick="showSection('login')">Connexion</a></li>
+                <li><a href="#admin" onclick="showSection('admin')">Admin</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Accueil -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Retrouvez votre téléphone perdu</h1>
+                <p>Service professionnel de localisation de téléphones mobiles avec technologie GPS avancée</p>
+                <button class="cta-button" onclick="showSection('services')">
+                    <i class="fas fa-search"></i> Localiser maintenant
+                </button>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="container">
+                <h2>Pourquoi choisir LOADING ?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-location-arrow"></i>
+                        <h3>Localisation précise</h3>
+                        <p>Technologie GPS de pointe pour une localisation au mètre près</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>100% Sécurisé</h3>
+                        <p>Vos données sont protégées et confidentielles</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Service 24h/24</h3>
+                        <p>Assistance disponible à tout moment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Services -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2>Nos Services</h2>
+            <div class="service-container">
+                <div class="service-form">
+                    <h3><i class="fas fa-mobile-alt"></i> Localiser un téléphone</h3>
+                    <form id="locateForm">
+                        <div class="form-group">
+                            <label>Méthode de localisation :</label>
+                            <select id="locationType" onchange="toggleLocationFields()">
+                                <option value="phone">Par numéro de téléphone</option>
+                                <option value="imei">Par IMEI (plus précis)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="phoneField">
+                            <label>Numéro de téléphone à localiser :</label>
+                            <input type="tel" id="phoneNumber" placeholder="+237 6XX XXX XXX">
+                        </div>
+
+                        <div class="form-group" id="imeiField" style="display: none;">
+                            <label>Code IMEI du téléphone :</label>
+                            <input type="text" id="imeiNumber" placeholder="Entrez le code IMEI (15 chiffres)" maxlength="15">
+                            <small class="help-text">Pour obtenir l'IMEI : composez *#06# sur le téléphone</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Votre numéro Orange Money :</label>
+                            <input type="tel" id="orangeNumber" placeholder="+237 6XX XXX XXX" required>
+                        </div>
+                        
+                        <div class="pricing">
+                            <div class="price-card">
+                                <h4>Localisation Standard</h4>
+                                <div class="price">2000 FCFA</div>
+                                <ul>
+                                    <li>Position approximative</li>
+                                    <li>Délai: 5-10 minutes</li>
+                                    <li>Par numéro de téléphone</li>
+                                </ul>
+                                <button type="button" onclick="initiatePayment('standard')">Choisir</button>
+                            </div>
+                            
+                            <div class="price-card premium">
+                                <h4>Localisation Premium</h4>
+                                <div class="price">5000 FCFA</div>
+                                <ul>
+                                    <li>Position précise</li>
+                                    <li>Historique des déplacements</li>
+                                    <li>Délai: 2-5 minutes</li>
+                                    <li>Par numéro ou IMEI</li>
+                                </ul>
+                                <button type="button" onclick="initiatePayment('premium')">Choisir</button>
+                            </div>
+
+                            <div class="price-card imei-exclusive">
+                                <h4>Localisation IMEI Pro</h4>
+                                <div class="price">8000 FCFA</div>
+                                <ul>
+                                    <li>Précision maximale (±1 mètre)</li>
+                                    <li>Localisation même téléphone éteint</li>
+                                    <li>Historique complet 30 jours</li>
+                                    <li>Délai: 30 secondes</li>
+                                </ul>
+                                <button type="button" onclick="initiatePayment('imei-pro')">Choisir</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2>Contactez-nous</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Informations de contact</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+237 6XX XXX XXX</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>contact@loading.cm</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Yaoundé, Cameroun</span>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Votre nom" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Votre email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Votre message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit">Envoyer le message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Connexion -->
+    <section id="login" class="section">
+        <div class="container">
+            <div class="login-container">
+                <div class="login-form">
+                    <h2>Connexion Visiteur</h2>
+                    <form id="userLogin">
+                        <div class="form-group">
+                            <input type="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Mot de passe" required>
+                        </div>
+                        <button type="submit">Se connecter</button>
+                    </form>
+                    <p><a href="#" onclick="showRegister()">Créer un compte</a></p>
+                </div>
+                
+                <div class="register-form" id="registerForm" style="display: none;">
+                    <h2>Créer un compte</h2>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Nom complet" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Téléphone" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Mot de passe" required>
+                        </div>
+                        <button type="submit">S'inscrire</button>
+                    </form>
+                    <p><a href="#" onclick="showLogin()">Déjà un compte ? Se connecter</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Admin -->
+    <section id="admin" class="section">
+        <div class="container">
+            <div class="admin-login" id="adminLogin">
+                <h2>Accès Administrateur</h2>
+                <form id="adminLoginForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Code d'accès" id="adminCode" required>
+                    </div>
+                    <button type="submit">Accéder</button>
+                </form>
+            </div>
+            
+            <div class="admin-panel" id="adminPanel" style="display: none;">
+                <h2>Panneau d'Administration</h2>
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <h3>Recherches aujourd'hui</h3>
+                        <div class="stat-number">45</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Revenus du mois</h3>
+                        <div class="stat-number">125,000 FCFA</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Utilisateurs actifs</h3>
+                        <div class="stat-number">123</div>
+                    </div>
+                </div>
+                
+                <div class="admin-actions">
+                    <h3>Actions Administrateur</h3>
+                    <div class="admin-locate">
+                        <h4>Localisation Gratuite (Admin)</h4>
+                        <select id="adminLocationType" onchange="toggleAdminFields()">
+                            <option value="phone">Par téléphone</option>
+                            <option value="imei">Par IMEI</option>
+                        </select>
+                        <input type="tel" id="adminPhoneNumber" placeholder="Numéro à localiser">
+                        <input type="text" id="adminImeiNumber" placeholder="Code IMEI" style="display: none;" maxlength="15">
+                        <button onclick="adminLocate()">Localiser</button>
+                    </div>
+                    
+                    <div class="admin-results" id="adminResults" style="display: none;">
+                        <h4>Résultats de localisation</h4>
+                        <div id="locationResult"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de paiement -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Confirmation de paiement</h3>
+            <div id="paymentDetails"></div>
+            <button id="confirmPayment">Confirmer le paiement</button>
+        </div>
+    </div>
+
+    <!-- Modal de résultats -->
+    <div id="resultsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Résultats de localisation</h3>
+            <div id="locationResults"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
