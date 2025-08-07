@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Phone Number Info + Location</title>
+</head>
+<body>
+
+<h2>Phone Number Lookup</h2>
+<input type="text" id="phoneInput" placeholder="+14158586273">
+<button onclick="lookupNumber()">Lookup Number</button>
+<pre id="result"></pre>
+
+<h2>Your Location</h2>
+<button onclick="getLocation()">Get My Location</button>
+<p id="location"></p>
+
+<script>
+async function lookupNumber() {
+  const number = document.getElementById('phoneInput').value;
+  const access_key = 'YOUR_NUMVERIFY_ACCESS_KEY'; // Insert your key here
+
+  try {
+    const response = await fetch(http://apilayer.net/api/validate?access_key=${access_key}&number=${encodeURIComponent(number)}&format=1);
+    const data = await response.json();
+    if(data.valid) {
+      document.getElementById('result').innerText = JSON.stringify({
+        country: data.country_name,
+        location: data.location,
+        carrier: data.carrier,
+        line_type: data.line_type
+      }, null, 2);
+    } else {
+      document.getElementById('result').innerText = 'Invalid phone number.';
+    }
+  } catch (e) {
+    document.getElementById('result').innerText = 'Error fetching data.';
+  }
+}
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      document.getElementById('location').innerText =
+        Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude};
+    }, error => {
+      document.getElementById('location').innerText = Error: ${error.message};
+    });
+  } else {
+    document.getElementById('location').innerText = "Geolocation is not supported.";
+  }
+}
+</script>
+
+</body>
+</html>
